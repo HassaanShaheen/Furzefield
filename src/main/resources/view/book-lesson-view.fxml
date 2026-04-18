@@ -23,7 +23,7 @@
                 <padding>
                     <Insets top="16" right="24" bottom="8" left="24"/>
                 </padding>
-                <Label text="Select a lesson in the table, then press Book selected lesson." styleClass="header-meta"/>
+                <Label text="Only lessons with free spaces (and none you are already booked on) are listed. Select a row, then press Book selected lesson." styleClass="header-meta" wrapText="true"/>
                 <Label fx:id="messageLabel" wrapText="true" maxWidth="900" minHeight="36"
                        styleClass="feedback-banner feedback-info"/>
             </VBox>

@@ -5,7 +5,7 @@ import com.flc.model.Lesson;
 import com.flc.navigation.StageNavigator;
 import com.flc.repository.LessonRepository;
 import com.flc.service.BookingService;
-import com.flc.service.TimetableService;
+import com.flc.ui.fx.LessonListFilters;
 import com.flc.ui.fx.LessonTableColumns;
 import com.flc.ui.fx.LessonTableRefresh;
 import com.flc.ui.fx.UserFeedback;
@@ -37,8 +37,8 @@ public class BookLessonController extends AbstractMemberScreenController {
     }
 
     private void reloadLessonRows() {
-        TimetableService ts = appContext.getTimetableService();
-        lessonTable.setItems(FXCollections.observableArrayList(ts.allLessonsSorted()));
+        lessonTable.setItems(FXCollections.observableArrayList(
+                LessonListFilters.forBookLessonTable(appContext, appContext.getCurrentMember())));
         LessonTableRefresh.refreshAll(lessonTable);
     }
 
@@ -57,9 +57,7 @@ public class BookLessonController extends AbstractMemberScreenController {
         LessonRepository lessons = appContext.getLessonRepository();
         Lesson lesson = lessons.findById(selected.getLessonId()).orElse(selected);
 
-        long booked = appContext.getBookingRepository().countByLesson(lesson);
-        int spacesLeft = (int) (BookingService.MAX_MEMBERS_PER_LESSON - booked);
-        if (spacesLeft <= 0) {
+        if (!LessonListFilters.lessonHasFreeSpace(appContext, lesson)) {
             String msg = "This lesson is full — no spaces left (maximum " + BookingService.MAX_MEMBERS_PER_LESSON + " members).";
             UserFeedback.validationIssue(messageLabel, msg, "Lesson full", msg);
             reloadLessonRows();
@@ -67,6 +65,8 @@ public class BookLessonController extends AbstractMemberScreenController {
         }
 
         UserFeedback.clear(messageLabel);
+        long booked = appContext.getBookingRepository().countByLesson(lesson);
+        int spacesLeft = (int) (BookingService.MAX_MEMBERS_PER_LESSON - booked);
         Optional<String> error = appContext.getBookingService().book(appContext.getCurrentMember(), lesson);
         int remaining = spacesLeft - (error.isEmpty() ? 1 : 0);
         String success = "Lesson booked successfully. Spaces left for this lesson: " + remaining + ".";

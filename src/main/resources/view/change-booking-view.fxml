@@ -23,7 +23,7 @@
                 <padding>
                     <Insets top="16" right="24" bottom="8" left="24"/>
                 </padding>
-                <Label text="1) Select a booking.  2) Select the lesson to move to.  3) Apply change."
+                <Label text="1) Select a booking.  2) Choose a target lesson (full lessons and invalid targets are hidden).  3) Apply change."
                        wrapText="true" styleClass="header-meta"/>
                 <Label fx:id="messageLabel" wrapText="true" maxWidth="900" minHeight="36"
                        styleClass="feedback-banner feedback-info"/>

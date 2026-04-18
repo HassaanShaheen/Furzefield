@@ -4,8 +4,8 @@ import com.flc.FlcApplicationContext;
 import com.flc.model.Booking;
 import com.flc.model.Lesson;
 import com.flc.navigation.StageNavigator;
-import com.flc.service.TimetableService;
 import com.flc.ui.fx.BookingTableColumns;
+import com.flc.ui.fx.LessonListFilters;
 import com.flc.ui.fx.LessonComboBoxCells;
 import com.flc.ui.fx.LessonTableColumns;
 import com.flc.ui.fx.LessonTableRefresh;
@@ -33,6 +33,10 @@ public class ChangeBookingController extends AbstractMemberScreenController {
         BookingTableColumns.applySummary(bookingTable);
         LessonTableColumns.apply(lessonTable, appContext, "Wk", "Spaces");
         UserFeedback.clear(messageLabel);
+        bookingTable.getSelectionModel().selectedItemProperty().addListener((obs, prev, sel) -> {
+            lessonTable.getSelectionModel().clearSelection();
+            reloadMoveToLessons(sel);
+        });
         onRefresh();
     }
 
@@ -40,8 +44,13 @@ public class ChangeBookingController extends AbstractMemberScreenController {
     private void onRefresh() {
         bookingTable.setItems(FXCollections.observableArrayList(
                 appContext.getBookingService().listBookingsForMember(appContext.getCurrentMember())));
-        TimetableService ts = appContext.getTimetableService();
-        lessonTable.setItems(FXCollections.observableArrayList(ts.allLessonsSorted()));
+        reloadMoveToLessons(bookingTable.getSelectionModel().getSelectedItem());
+    }
+
+    private void reloadMoveToLessons(Booking selectedBooking) {
+        lessonTable.setItems(FXCollections.observableArrayList(
+                LessonListFilters.forChangeBookingTargetTable(
+                        appContext, appContext.getCurrentMember(), selectedBooking)));
         LessonTableRefresh.refreshAll(lessonTable);
     }
 
