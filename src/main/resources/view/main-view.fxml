@@ -52,11 +52,11 @@
                     <RowConstraints minHeight="52"/>
                 </rowConstraints>
 
-                <Button text="View Timetable" styleClass="tile-button" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                <Button text="Book Lesson" styleClass="tile-button" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-                <Button text="Change Booking" styleClass="tile-button" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                <Button text="Add Review" styleClass="tile-button" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                <Button text="View Reports" styleClass="tile-button" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <Button fx:id="timetableButton" text="View Timetable" styleClass="tile-button" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <Button fx:id="bookButton" text="Book Lesson" styleClass="tile-button" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Button fx:id="changeBookingButton" text="Change Booking" styleClass="tile-button" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Button fx:id="reviewButton" text="Add Review" styleClass="tile-button" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Button fx:id="reportsButton" text="View Reports" styleClass="tile-button" maxWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
             </GridPane>
         </VBox>
     </center>

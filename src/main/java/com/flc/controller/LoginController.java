@@ -1,7 +1,9 @@
 package com.flc.controller;
 
+import com.flc.FlcApplicationContext;
+import com.flc.model.UserAccount;
 import com.flc.navigation.StageNavigator;
-import com.flc.service.AuthService;
+import com.flc.ui.navigation.NavigationSupport;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,11 +28,11 @@ public class LoginController {
     private Hyperlink signupLink;
 
     private StageNavigator navigator;
-    private AuthService authService;
+    private FlcApplicationContext appContext;
 
-    public void init(StageNavigator navigator, AuthService authService) {
+    public void init(StageNavigator navigator, FlcApplicationContext appContext) {
         this.navigator = navigator;
-        this.authService = authService;
+        this.appContext = appContext;
         successLabel.setManaged(false);
         successLabel.setVisible(false);
         errorLabel.setManaged(false);
@@ -56,13 +58,12 @@ public class LoginController {
     private void attemptLogin() {
         clearError();
         setFlashSuccess(null);
-        authService.login(usernameField.getText(), passwordField.getText())
+        appContext.getAuthService().login(usernameField.getText(), passwordField.getText())
                 .ifPresentOrElse(
                         this::showError,
                         () -> {
-                            try {
-                                navigator.showDashboard(authService.getCurrentUser());
-                            } catch (Exception ex) {
+                            UserAccount user = appContext.getAuthService().getCurrentUser();
+                            if (!NavigationSupport.tryOpenDashboard(navigator, user)) {
                                 showError("Could not open dashboard.");
                             }
                         }

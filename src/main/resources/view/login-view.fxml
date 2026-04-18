@@ -24,6 +24,7 @@
 
         <Label text="Furzefield Leisure Centre" styleClass="auth-brand"/>
         <Label text="Sign in to your account" styleClass="auth-subtitle"/>
+        <Label text="Demo members: m01 … m10 — password: flc2026" styleClass="header-meta" wrapText="true" maxWidth="280"/>
 
         <Label fx:id="successLabel" styleClass="success-banner" wrapText="true" maxWidth="280"/>
 

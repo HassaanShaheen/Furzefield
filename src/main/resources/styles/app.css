@@ -186,3 +186,69 @@
 .tile-button:pressed {
     -fx-background-color: #eff6ff;
 }
+
+.report-text {
+    -fx-font-family: "Consolas", "Monaco", monospace;
+    -fx-font-size: 12px;
+}
+
+.feedback-banner {
+    -fx-padding: 10 14 10 14;
+    -fx-background-radius: 8px;
+}
+
+.feedback-info {
+    -fx-text-fill: #475569;
+    -fx-background-color: #f1f5f9;
+    -fx-border-color: #e2e8f0;
+    -fx-border-radius: 8px;
+}
+
+.feedback-success {
+    -fx-text-fill: #166534;
+    -fx-background-color: #f0fdf4;
+    -fx-border-color: #bbf7d0;
+    -fx-border-radius: 8px;
+    -fx-font-weight: bold;
+}
+
+.feedback-error {
+    -fx-text-fill: #b91c1c;
+    -fx-background-color: #fef2f2;
+    -fx-border-color: #fecaca;
+    -fx-border-radius: 8px;
+    -fx-font-weight: bold;
+}
+
+/* ----- Sub-screens (timetable, book, etc.) ----- */
+
+.subscreen-toolbar {
+    -fx-background-color: linear-gradient(to right, #0f172a, #1e40af);
+    -fx-padding: 12 20 12 20;
+    -fx-spacing: 16;
+    -fx-alignment: CENTER_LEFT;
+    -fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.2), 6, 0, 0, 1);
+}
+
+.toolbar-back-button {
+    -fx-background-color: rgba(255, 255, 255, 0.18);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 18 8 18;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.toolbar-back-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.28);
+}
+
+.toolbar-back-button:pressed {
+    -fx-background-color: rgba(255, 255, 255, 0.12);
+}
+
+.toolbar-title {
+    -fx-text-fill: #e2e8f0;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}

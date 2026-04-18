@@ -16,5 +16,10 @@ class MainAppTest {
         assertNotNull(MainApp.class.getResource("/view/login-view.fxml"));
         assertNotNull(MainApp.class.getResource("/view/signup-view.fxml"));
         assertNotNull(MainApp.class.getResource("/styles/app.css"));
+        assertNotNull(MainApp.class.getResource("/view/timetable-view.fxml"));
+        assertNotNull(MainApp.class.getResource("/view/book-lesson-view.fxml"));
+        assertNotNull(MainApp.class.getResource("/view/change-booking-view.fxml"));
+        assertNotNull(MainApp.class.getResource("/view/review-view.fxml"));
+        assertNotNull(MainApp.class.getResource("/view/reports-view.fxml"));
     }
 }

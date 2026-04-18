@@ -1,7 +1,8 @@
 package com.flc.controller;
 
+import com.flc.FlcApplicationContext;
 import com.flc.navigation.StageNavigator;
-import com.flc.service.AuthService;
+
 import java.util.Optional;
 
 import javafx.application.Platform;
@@ -30,11 +31,11 @@ public class SignupController {
     private Hyperlink loginLink;
 
     private StageNavigator navigator;
-    private AuthService authService;
+    private FlcApplicationContext appContext;
 
-    public void init(StageNavigator navigator, AuthService authService) {
+    public void init(StageNavigator navigator, FlcApplicationContext appContext) {
         this.navigator = navigator;
-        this.authService = authService;
+        this.appContext = appContext;
         errorLabel.setManaged(false);
         errorLabel.setVisible(false);
         loginLink.setOnAction(e -> goLogin());
@@ -44,7 +45,7 @@ public class SignupController {
 
     private void attemptSignup() {
         clearError();
-        Optional<String> regError = authService.register(
+        Optional<String> regError = appContext.getAuthService().register(
                 usernameField.getText(),
                 displayNameField.getText(),
                 passwordField.getText(),
@@ -54,6 +55,7 @@ public class SignupController {
             showError(regError.get());
             return;
         }
+        appContext.syncMemberFromRegistration(usernameField.getText(), displayNameField.getText());
         try {
             navigator.showLogin("Account created. Please sign in with your new username and password.");
         } catch (Exception ex) {

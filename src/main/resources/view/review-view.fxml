@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.flc.controller.ReviewController"
+            styleClass="dashboard-root">
+    <top>
+        <HBox styleClass="subscreen-toolbar" alignment="CENTER_LEFT" spacing="16">
+            <padding>
+                <Insets left="4" right="4"/>
+            </padding>
+            <Button text="←  Back to dashboard" onAction="#onBack" styleClass="toolbar-back-button"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="Add review" styleClass="toolbar-title"/>
+        </HBox>
+    </top>
+    <center>
+        <VBox spacing="14" styleClass="dashboard-body">
+            <padding>
+                <Insets top="20" right="28" bottom="24" left="28"/>
+            </padding>
+            <Label text="Review a lesson you attended" styleClass="section-heading"/>
+            <Label text="Lessons you are booked on and have not reviewed yet appear in the list. Saved reviews stay in the table below — they are not lost when you return to the dashboard."
+                   wrapText="true" styleClass="header-meta"/>
+            <Label text="Lesson" styleClass="field-label"/>
+            <ComboBox fx:id="lessonCombo" prefWidth="520"/>
+            <Label text="Rating (1 = Very dissatisfied … 5 = Very satisfied)" styleClass="field-label"/>
+            <Spinner fx:id="ratingSpinner" prefWidth="120" editable="true"/>
+            <Label text="Comment" styleClass="field-label"/>
+            <TextArea fx:id="commentArea" prefRowCount="4" wrapText="true" prefWidth="520"/>
+            <Label fx:id="messageLabel" wrapText="true" maxWidth="520" minHeight="36"
+                   styleClass="feedback-banner feedback-info"/>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <Button text="Submit review" onAction="#onSubmit" styleClass="primary-button"/>
+                <Button text="←  Back to dashboard" onAction="#onBack" styleClass="tile-button"/>
+            </HBox>
+            <Label text="Your reviews" styleClass="section-heading"/>
+            <TableView fx:id="reviewsTable" prefHeight="220" prefWidth="720"/>
+        </VBox>
+    </center>
+</BorderPane>
